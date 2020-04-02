@@ -13,6 +13,7 @@
     "build": "npm-run-all --parallel build:*",
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.client.js --progress",
     "dev:server": "cross-env NODE_ENV=development nest start --watch",
+    "start": "pm2 reload ecosystem.config.js",
     "dev": "run-p dev:*",
     "test": "jest",
     "test:watch": "jest --watch",
