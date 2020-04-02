@@ -1,0 +1,27 @@
+# compiled output
+dist
+node_modules
+views/index.hbs
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+coverage
+
+# IDEs and editors
+/.idea
+
+
+# IDE - VSCode
+.vscode/*
+
+
+.env

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": false,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "esnext",
+    "sourceMap": true,
+    "jsx": "react",
+    "esModuleInterop": true,
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "incremental": true
+  },
+  "paths": {
+    "server/*": ["server/*"],
+    "client/*": ["client/*"],
+    "common/*": ["common/*"]
+  },
+  "exclude": ["node_modules", "dist"]
+}
