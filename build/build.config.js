@@ -15,6 +15,8 @@ const fileOutputName = isDev
   ? 'assets/[name].[ext]'
   : 'assets/[name].min.[contenthash:8].[ext]';
 
+
+
 function getFileHandle(ssr) {
   const result = {
     test: filesRegExp,

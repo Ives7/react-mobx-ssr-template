@@ -1,11 +1,13 @@
+import path from 'path';
+import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { createElement } from 'react';
 import { ServerApp } from '../../server/server-app';
 import { Request, Response } from 'express';
 import { matchRoutes } from 'react-router-config';
 import { routes } from '../routes/routes';
 import { genInitStore } from './gen-init-store';
 import { loadDataRunner } from './load-data-runner';
+import { ChunkExtractor } from '@loadable/server';
 
 export async function serverRender(
   response: Response,
@@ -17,15 +19,19 @@ export async function serverRender(
   const initRootStore = genInitStore();
   // 触发命中route的loadData
   await loadDataRunner(matchedRoutes, initRootStore);
+
+  const statsFile = path.resolve('dist/loadable-stats.json');
+  const extractor = new ChunkExtractor({ statsFile });
+  const jsx = extractor.collectChunks(
+    <ServerApp
+      location={request.path}
+      basename={process.env.BASENAME}
+      context={{}}
+    />,
+  );
   // 渲染页面
   response.render('index', {
     rootStore: JSON.stringify(initRootStore),
-    html: renderToString(
-      createElement(ServerApp, {
-        location: request.path,
-        basename: process.env.BASENAME,
-        context: {},
-      }),
-    ),
+    html: renderToString(jsx),
   });
 }

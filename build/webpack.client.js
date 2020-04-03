@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const baseConfig = require('./webpack.base');
 const devServerConfig = require('./weboack.dev');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+
 const {
   getFileHandle,
   isDev,
@@ -22,6 +23,7 @@ const miniCssRule = {
 };
 const clientConfig = {
   devtool: 'source-map',
+
   entry: [
     isDev && 'react-hot-loader/patch',
     isDev && 'webpack-dev-server/client',
@@ -42,12 +44,12 @@ const clientConfig = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: 'tsconfig.build.json',
+              configFile: path.resolve('tsconfig.build.json'),
               transpileOnly: true,
+              onlyCompileBundledFiles: true,
             },
           },
         ],
-        exclude: [/node_modules/],
       },
 
       {
@@ -112,12 +114,19 @@ const clientConfig = {
       name: 'runtime',
     },
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
         vendors: {
           name: 'vendors',
-          chunks: 'initial',
+          chunks: 'all',
           test: /node_modules/,
           priority: 1,
+        },
+        common: {
+          name: 'common',
+          minSize: 0,
+          minChunks: 2,
+          chunks: 'initial',
         },
       },
     },
@@ -128,13 +137,6 @@ if (isDev) {
   clientConfig.resolve.alias['react-dom'] = '@hot-loader/react-dom';
   clientConfig.devtool = 'cheap-module-source-map';
   clientConfig.devServer = devServerConfig;
-} else {
-  clientConfig.optimization.splitChunks.cacheGroups.common = {
-    name: 'common',
-    minSize: 0,
-    minChunks: 2,
-    chunks: 'initial',
-  };
 }
 
 module.exports = webpackMerge(baseConfig, clientConfig);

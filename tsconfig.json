@@ -7,7 +7,7 @@
     "experimentalDecorators": true,
     "target": "esnext",
     "sourceMap": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "esModuleInterop": true,
     "outDir": "./dist",
     "baseUrl": "./src",

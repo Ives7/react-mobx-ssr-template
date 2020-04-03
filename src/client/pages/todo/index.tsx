@@ -26,8 +26,7 @@ export const TodoList: React.FC = observer(function TodoList() {
     </ul>
   );
 });
-
-export const Todo: React.FC & LoadDataComponent = () => {
+const Todo: React.FC & LoadDataComponent = () => {
   const inputRef = useRef<HTMLInputElement>();
   const { todoStore } = useRootStore();
   const handleAddTodo = useCallback(() => {
@@ -56,3 +55,5 @@ Todo.loadData = (
   //initRootStore.todoStore = initRootStore.todoStore || {};
   initRootStore.todoStore.todoList = todoStore.todoList;
 };
+
+export default Todo;

@@ -8,7 +8,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 module.exports = {
   output: {
     publicPath: process.env.PUBLIC_PATH,
-    filename:jsFilename,
+    filename: jsFilename,
     chunkFilename: jsFilename,
   },
   resolve: {
@@ -36,5 +36,12 @@ module.exports = {
     ],
   },
   mode: isDev ? devText : prodText,
-  plugins: [new CleanWebpackPlugin(), new ForkTsCheckerWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      compilerOptions: {
+        modules: 'commonjs',
+      },
+    }),
+  ],
 };
