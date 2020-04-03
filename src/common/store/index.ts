@@ -15,6 +15,7 @@ function getClientRootStore(): RootStore {
   const rootStore = new RootStore();
   Object.keys(rootStore).forEach(key => {
     if (isMobxStore(rootStore, key)) {
+      // 注水
       rootStore[key] = extendObservable(
         rootStore[key],
         window.__ROOT__STORE__[key],

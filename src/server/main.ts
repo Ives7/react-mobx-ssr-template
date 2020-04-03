@@ -4,12 +4,15 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { NotFoundExceptionFilter } from './filters/not-found-exception.filter';
 import { resolve } from 'path';
+import cookieParser from 'cookie-parser';
 
 process.env.SSR = 'true';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  
   app.disable('x-powered-by');
+  app.use(cookieParser());
   app.setViewEngine('hbs');
   app.setBaseViewsDir(resolve('views'));
   app.useStaticAssets(resolve('public'));

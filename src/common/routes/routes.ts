@@ -1,7 +1,7 @@
 import { RouteConfig } from 'react-router-config';
-import { todoLoadData } from '../../client/pages/todo/load-data';
-import Todo from '../../client/pages/todo';
-import User from '../../client/pages/user';
+import { todoLoadData } from 'client/pages/todo/load-data';
+import Todo from 'client/pages/todo';
+import User from 'client/pages/user';
 
 /*
  * 小组件或者小模块不建议做异步加载，下面只是提供一个按需加载的演示demo。
@@ -9,7 +9,9 @@ import User from '../../client/pages/user';
  * 1、小组件反而要额外开启请求消耗，请求的消耗可能要比体积大些影响更大。
  * 2、数据脱水的loadData方法需要拆分。
  * 3、即使首屏带着数据，也会在客户端短时间内闪现白屏。
+ * ps:如果使用按需加载 Load Data请放在单独的文件 且不要与加载组件有引用关系
  * */
+
 // import { loadable } from '../helpers/loadable';
 // const UserAsync = loadable(() => import('client/pages/user'));
 // const TodoAsync = loadable(() => import('client/pages/todo'));
