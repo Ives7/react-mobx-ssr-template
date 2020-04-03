@@ -9,6 +9,7 @@ import { ChunkExtractor } from '@loadable/server';
 import { SSRConfig } from './request';
 import { useRootStore } from 'client/hooks/useStore';
 import { toJS } from 'mobx';
+import Helmet from 'react-helmet';
 
 export async function serverRender(
   response: Response,
@@ -30,10 +31,14 @@ export async function serverRender(
       context={{}}
     />,
   );
+  const html = renderToString(jsx);
+  const helmet = Helmet.renderStatic();
   // 渲染页面
   response.render('index', {
     // 脱水的数据
     rootStore: JSON.stringify(initRootStore),
-    html: renderToString(jsx),
+    html,
+    title: helmet.title.toString(),
+    description: helmet.meta.toString(),
   });
 }

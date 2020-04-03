@@ -1561,6 +1561,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-helmet@^5.0.15":
+  version "5.0.15"
+  resolved "https://registry.npm.taobao.org/@types/react-helmet/download/@types/react-helmet-5.0.15.tgz#af0370617307e9f062c6aee0f1f5588224ce646e"
+  integrity sha1-rwNwYXMH6fBixq7g8fVYgiTOZG4=
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-router-config@^5.0.1":
   version "5.0.1"
   resolved "https://registry.npm.taobao.org/@types/react-router-config/download/@types/react-router-config-5.0.1.tgz#54da8418190ee47484dee279975e2b8038fb8b5d"
