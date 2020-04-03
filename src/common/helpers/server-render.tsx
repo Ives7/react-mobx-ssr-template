@@ -7,10 +7,15 @@ import { routes } from '../routes/routes';
 import { loadDataRunner } from './load-data-runner';
 import { ChunkExtractor } from '@loadable/server';
 import { SSRConfig } from './request';
-import { useRootStore } from 'client/hooks/useStore';
+import { useRootStore } from 'client/hooks/use-store';
 import { toJS } from 'mobx';
-import { StaticContext } from 'react-router';
 import Helmet from 'react-helmet';
+
+export interface Context {
+  statusCode?: number;
+  action?: string;
+  url?: string;
+}
 
 export async function serverRender(
   response: Response,
@@ -25,7 +30,7 @@ export async function serverRender(
   const extractor = new ChunkExtractor({ statsFile });
   const rootStore = useRootStore();
   const initRootStore = toJS(rootStore, { recurseEverything: true });
-  const context: StaticContext = { statusCode: null };
+  const context: Context = { statusCode: null };
   const jsx = extractor.collectChunks(
     <ServerApp
       location={request.path}
@@ -35,10 +40,20 @@ export async function serverRender(
   );
   const html = renderToString(jsx);
   const helmet = Helmet.renderStatic();
+  console.log(context);
   // 渲染页面
+
   if (context.statusCode) {
+    // 输出404或者302等状态码
     response.status(context.statusCode);
   }
+
+  // 重定向
+  if (context.action === 'REPLACE') {
+    response.redirect(context.url || '/');
+    return;
+  }
+
   response.render('index', {
     // 脱水的数据
     rootStore: JSON.stringify(initRootStore),

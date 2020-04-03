@@ -10,7 +10,7 @@ const Base: React.FC<RouteConfigComponentProps> = function(
     <>
       <Helmet defaultTitle="SSR-template" />
       <Header {...props} />
-      {renderRoutes(props.route.routes)}
+      <main>{renderRoutes(props.route.routes)}</main>
     </>
   );
 };

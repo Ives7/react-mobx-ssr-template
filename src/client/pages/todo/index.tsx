@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 
 import { observer } from 'mobx-react';
-import { useRootStore } from 'client/hooks/useStore';
+import { useRootStore } from 'client/hooks/use-store';
 import { initTodoList } from 'common/fake-data';
 import { RootStore } from 'common/store/root.store';
 import { LoadDataComponent } from '../../../common/inteface';
 import './index.less'
+
 export const TodoList: React.FC = observer(function TodoList() {
   const { todoStore } = useRootStore();
   useEffect(() => {
@@ -13,6 +14,8 @@ export const TodoList: React.FC = observer(function TodoList() {
       todoStore.setTodoList(initTodoList);
     }
   }, []);
+  
+  
   return (
     <ul>
       {todoStore.todoList.map(todoItem => {

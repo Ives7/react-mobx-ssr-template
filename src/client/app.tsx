@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { routes } from '../common/routes/routes';
 import { Provider } from 'mobx-react';
-import { useRootStore } from './hooks/useStore';
+import { useRootStore } from './hooks/use-store';
 import { renderRoutes } from 'react-router-config';
 
 const rootStore = useRootStore();

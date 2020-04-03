@@ -6,3 +6,4 @@ const rootStore = getRootStore();
 export function useRootStore(): RootStore {
   return rootStore;
 }
+

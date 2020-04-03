@@ -1,5 +1,5 @@
 //import { RootStore } from '../../../common/store/root.store';
-import { useRootStore } from '../../hooks/useStore';
+import { useRootStore } from '../../hooks/use-store';
 import { initTodoList } from '../../../common/fake-data';
 //import {Request} from 'express';
 

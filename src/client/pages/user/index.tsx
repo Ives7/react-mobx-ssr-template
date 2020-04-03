@@ -1,7 +1,9 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-export default function User(): React.ReactElement {
+import { RouteComponentProps } from 'react-router-dom';
+
+const User: React.FC<RouteComponentProps> = function User() {
   return (
     <>
       <Helmet>
@@ -10,4 +12,6 @@ export default function User(): React.ReactElement {
       <div>User 777</div>
     </>
   );
-}
+};
+
+export default User;
