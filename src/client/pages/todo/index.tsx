@@ -5,7 +5,7 @@ import { useRootStore } from 'client/hooks/useStore';
 import { initTodoList } from 'common/fake-data';
 import { RootStore } from 'common/store/root.store';
 import { LoadDataComponent } from '../../../common/inteface';
-
+import './index.less'
 export const TodoList: React.FC = observer(function TodoList() {
   const { todoStore } = useRootStore();
   useEffect(() => {

@@ -1,18 +1,16 @@
-import { MenuRouteConfig } from 'common/routes/routes';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { getOnePath } from 'common/helpers/get-one-path';
-
-export interface HeaderProps {
-  routes: MenuRouteConfig[];
-}
+import { RouteConfigComponentProps } from 'react-router-config';
 
 
-export const Header: React.FC<HeaderProps> = function Header(props) {
+const Header: React.FC<RouteConfigComponentProps> = function Header(
+  props: RouteConfigComponentProps,
+) {
   return (
     <header>
       <nav>
-        {props.routes
+        {props.route.routes
           .filter(route => route.menu)
           .map(route => {
             const to = getOnePath(route.path);
@@ -26,3 +24,5 @@ export const Header: React.FC<HeaderProps> = function Header(props) {
     </header>
   );
 };
+
+export default Header;

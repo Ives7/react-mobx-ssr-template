@@ -2,15 +2,15 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { routes } from '../common/routes/routes';
 import { Provider } from 'mobx-react';
-import { Base } from './layouts/base/base';
 import { useRootStore } from './hooks/useStore';
+import { renderRoutes } from 'react-router-config';
 
 const rootStore = useRootStore();
 export const App: React.FC = function App() {
   return (
     <Provider {...rootStore}>
       <BrowserRouter>
-        <Base routes={routes} />
+        {renderRoutes(routes)}
       </BrowserRouter>
     </Provider>
   );
