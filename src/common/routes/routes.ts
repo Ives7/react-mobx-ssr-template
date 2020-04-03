@@ -2,8 +2,8 @@ import { RouteConfig } from 'react-router-config';
 import { todoLoadData } from 'client/pages/todo/load-data';
 import Todo from 'client/pages/todo';
 import User from 'client/pages/user';
-import Base from '../../client/layouts/base';
-
+import NotFoundComponent from 'client/pages/404';
+import Base from 'client/layouts/base';
 
 /*
  * 小组件或者小模块不建议做异步加载，下面只是提供一个按需加载的演示demo。
@@ -36,6 +36,9 @@ export const routes: MenuRouteConfig[] = [
         path: '/user',
         component: User,
         menu: 'user',
+      },
+      {
+        component: NotFoundComponent,
       },
     ],
   },

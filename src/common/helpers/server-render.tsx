@@ -9,6 +9,7 @@ import { ChunkExtractor } from '@loadable/server';
 import { SSRConfig } from './request';
 import { useRootStore } from 'client/hooks/useStore';
 import { toJS } from 'mobx';
+import { StaticContext } from 'react-router';
 import Helmet from 'react-helmet';
 
 export async function serverRender(
@@ -24,16 +25,20 @@ export async function serverRender(
   const extractor = new ChunkExtractor({ statsFile });
   const rootStore = useRootStore();
   const initRootStore = toJS(rootStore, { recurseEverything: true });
+  const context: StaticContext = { statusCode: null };
   const jsx = extractor.collectChunks(
     <ServerApp
       location={request.path}
       basename={process.env.BASENAME}
-      context={{}}
+      context={context}
     />,
   );
   const html = renderToString(jsx);
   const helmet = Helmet.renderStatic();
   // 渲染页面
+  if (context.statusCode) {
+    response.status(context.statusCode);
+  }
   response.render('index', {
     // 脱水的数据
     rootStore: JSON.stringify(initRootStore),
